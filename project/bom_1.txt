@@ -2,26 +2,17 @@ Bill of materials for analog multiplier
 =======================================
 
 Oscillator:
-    LT: 
-        LTC6906
+    LTC6906 (Farnell 1663928)
 
 Comparator: 
-    TI: 
-        TLV3201
-        LMV7239
-    ST:
-        TS3021 (Icc=f(f) specified (300uA @ 1MHz, 5V))
+    TS3021 (Farnell 2212242)
 
 Analog switch: 
-    TI:
-        TS5A3157
-        SN74LVC1G3157
-    ST:
-        STG71
+    TS5A3157 (Farnell 1755580)
 
-Additional tasks:
-    - Check for pin compatibility
-        - Comparators are pin compatible in SOT23-5
-        - Analog switches are not pin compatible!
-    - SMD carrier boards for mounting SOT23-5
-    - 
+Operational amplifier:
+    OPA835 (Farnell 1903635)
+
+Circuit board:
+    RM 1.27 mm (Distrelec 450408)
+
