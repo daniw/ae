@@ -60,7 +60,7 @@ S 4050 3350 700  500
 U 546C4FE0
 F0 "sine" 60
 F1 "sine.sch" 60
-F2 "ref" I R 4750 3700 60 
+F2 "ref" I L 4050 3750 60 
 F3 "sine" O R 4750 3500 60 
 $EndSheet
 $Sheet
@@ -78,6 +78,7 @@ F1 "sw_in.sch" 60
 F2 "sw_out" O R 4750 2850 60 
 F3 "sw_a" I L 4050 2750 60 
 F4 "sw_b" I L 4050 2950 60 
+F5 "ref" I L 4050 3050 60 
 $EndSheet
 $Sheet
 S 6600 3150 700  500 
@@ -87,22 +88,25 @@ F1 "sw_out.sch" 60
 F2 "sw_in" I L 6600 3300 60 
 F3 "sw_out_a" O R 7300 3300 60 
 F4 "sw_out_b" O R 7300 3500 60 
+F5 "ref" I L 6600 3500 60 
 $EndSheet
 $Sheet
 S 7800 3150 700  500 
 U 546CF53E
 F0 "filt_out_audio" 60
 F1 "filt_out_audio.sch" 60
-F2 "filt_in" I L 7800 3500 60 
+F2 "filt_in" I L 7800 3400 60 
 F3 "filt_out" O R 8500 3400 60 
+F4 "ref" I L 7800 3550 60 
 $EndSheet
 $Sheet
 S 7800 2400 700  500 
 U 546CF8A3
 F0 "filt_out_us" 60
 F1 "filt_out_us.sch" 60
-F2 "filt_in" I L 7800 2750 60 
+F2 "filt_in" I L 7800 2550 60 
 F3 "filt_out" O R 8500 2650 60 
+F4 "ref" I L 7800 2800 60 
 $EndSheet
 $Sheet
 S 2900 2600 700  500 
@@ -111,6 +115,7 @@ F0 "filt_in_us" 60
 F1 "filt_in_us.sch" 60
 F2 "filt_in" I L 2900 2850 60 
 F3 "filt_out" O R 3600 2950 60 
+F4 "ref" I L 2900 3000 60 
 $EndSheet
 $Sheet
 S 2900 1850 650  500 
@@ -119,6 +124,7 @@ F0 "filt_in_audio" 60
 F1 "filt_in_audio.sch" 60
 F2 "filt_in" I L 2900 2100 60 
 F3 "filt_out" O R 3550 2200 60 
+F4 "ref" I L 2900 2250 60 
 $EndSheet
 $Sheet
 S 1750 2600 700  500 
@@ -126,6 +132,7 @@ U 546CFBCA
 F0 "mic_us" 60
 F1 "mic_us.sch" 60
 F2 "mic_out" O R 2450 2850 60 
+F3 "ref" I R 2450 3000 60 
 $EndSheet
 $Sheet
 S 1750 1850 700  500 
@@ -133,6 +140,7 @@ U 546CFBE2
 F0 "mic_audio" 60
 F1 "mic_audio.sch" 60
 F2 "mic_out" O R 2450 2100 60 
+F3 "ref" I R 2450 2250 60 
 $EndSheet
 $Sheet
 S 9000 2400 650  500 
@@ -171,15 +179,55 @@ Wire Wire Line
 Wire Wire Line
 	6100 3300 6600 3300
 Wire Wire Line
-	7300 3500 7800 3500
+	7550 3300 7300 3300
 Wire Wire Line
-	7300 3300 7550 3300
-Wire Wire Line
-	7550 3300 7550 2750
-Wire Wire Line
-	7550 2750 7800 2750
+	7550 2550 7550 3300
 Wire Wire Line
 	8500 2650 9000 2650
 Wire Wire Line
 	8500 3400 9000 3400
+Wire Wire Line
+	7300 3500 7550 3500
+Wire Wire Line
+	7550 3500 7550 3400
+Wire Wire Line
+	7550 3400 7800 3400
+Wire Wire Line
+	7550 2550 7800 2550
+Wire Wire Line
+	2550 5450 7700 5450
+Wire Wire Line
+	6450 5450 6450 3500
+Wire Wire Line
+	6450 3500 6600 3500
+Wire Wire Line
+	5250 3700 5100 3700
+Wire Wire Line
+	5100 3700 5100 5450
+Connection ~ 5100 5450
+Wire Wire Line
+	7800 2800 7700 2800
+Wire Wire Line
+	7700 2800 7700 5450
+Connection ~ 6450 5450
+Wire Wire Line
+	7800 3550 7700 3550
+Connection ~ 7700 3550
+Wire Wire Line
+	4050 3050 3900 3050
+Wire Wire Line
+	3900 3050 3900 5450
+Connection ~ 3900 5450
+Wire Wire Line
+	4050 3750 3900 3750
+Connection ~ 3900 3750
+Wire Wire Line
+	2450 2250 2900 2250
+Wire Wire Line
+	2750 2250 2750 5450
+Connection ~ 2750 5450
+Wire Wire Line
+	2450 3000 2900 3000
+Connection ~ 2750 3000
+Connection ~ 2750 2250
 $EndSCHEMATC

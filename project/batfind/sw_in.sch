@@ -45,10 +45,29 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text HLabel 5500 3850 2    60   Output ~ 0
+Text HLabel 4400 3900 2    60   Output ~ 0
 sw_out
 Text HLabel 3700 3800 0    60   Input ~ 0
 sw_a
-Text HLabel 3700 4050 0    60   Input ~ 0
+Text HLabel 3700 4000 0    60   Input ~ 0
 sw_b
+Text HLabel 3700 4300 0    60   Input ~ 0
+ref
+$Comp
+L GS3 GS?
+U 1 1 5478B6F4
+P 4050 3900
+F 0 "GS?" H 4100 4100 50  0000 C CNN
+F 1 "GS3" H 4100 3701 40  0000 C CNN
+F 2 "GS3" V 4138 3826 30  0000 C CNN
+F 3 "" H 4050 3900 60  0000 C CNN
+	1    4050 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3700 3800 3900 3800
+Wire Wire Line
+	3700 4000 3900 4000
+Wire Wire Line
+	4200 3900 4400 3900
 $EndSCHEMATC
