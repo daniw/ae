@@ -7,5 +7,5 @@
 * [Lasten](load.md)
 
 ## Ordner
-* [Übertragung](transmission/)
+* [Übertragung](transmit/)
 * [Testlast](load/)
