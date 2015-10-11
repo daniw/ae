@@ -8,4 +8,4 @@
 
 ## Ordner
 * [Übertragung](transmission/)
-* [Testlast](load)
+* [Testlast](load/)
