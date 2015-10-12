@@ -1,0 +1,34 @@
+\section{Lösung}
+Die Leistung wird mit Spulen L, welche als Tiefpass wirken in die Leitung 
+eingekoppelt. Die Daten werden mit Kondensatoren als Hochpass in die Leitung 
+eingekoppelt. 
+\begin{figure}[h!]
+    \centering
+    \begin{circuitikz}
+        \draw
+            % Power path
+            ( 0,6) to[L=L, -*] (3,6) -- (12,6) to[L=L, *-] (15,6)
+            ( 0,4) to[L=L]     (3,4) -- (12,4) to[L=L]     (15,4)
+            ( 0,6) to[V=24<\volt>, o-o] (0,4)
+            (15,6) to[R=$R_L$, o-o] (15,4)
+            % Data path
+            ( 0,2) -| ( 3,2) to[C=C]     (3,4) -- (3,6)
+            ( 0,0) -| ( 5,2) to[C=C, -*] (5,4)
+            (15,2) -| (12,2) to[C=C]     (12,4) -- (12,6)
+            (15,0) -| (10,2) to[C=C, -*] (10,4)
+            ( 2,2) to[R=$R_{CAN}$, *-*] ( 2,0)
+            (13,2) to[R=$R_{CAN}$, *-*] (13,0)
+        ;
+    \end{circuitikz}
+    \caption{Prinzipschaltbild der Lösung}
+    \label{fig:sol}
+\end{figure}
+Dabei müssen folgende Impedanzen beachtet werden: 
+\paragraph{Power}
+\[ X_L = j \cdot \omega \cdot L \]
+\[ X_{L_{P}}   = j \cdot \omega_{P_{max}}   \cdot L << R_{L} \]
+\[ X_{L_{CAN}} = j \cdot \omega_{CAN_{min}} \cdot L >> R_{L} \]
+\paragraph{CAN}
+\[ X_C = \frac{1}{j \cdot \omega \cdot C} \]
+\[ X_{C_{P}}   = \frac{1}{j \cdot \omega_{P_{max}}   \cdot C} >> R_{CAN} \]
+\[ X_{C_{CAN}} = \frac{1}{j \cdot \omega_{CAN_{min}} \cdot C} << R_{CAN} \]
