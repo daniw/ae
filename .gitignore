@@ -1,3 +1,16 @@
+# Temporary latex files
+*.aux
+*.lof
 *.log
+*.lol
+*.lot
+*.out
 *.raw
-hs15/powercan/transmit/doc/doc.synctex.gz
+*.synctex.gz
+*.toc
+
+# PDF outputs
+hs15/powercan/transmit/doc/doc.pdf
+
+# VIM temporary files
+*.swp
