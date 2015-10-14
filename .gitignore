@@ -5,9 +5,13 @@
 *.lol
 *.lot
 *.out
-*.raw
 *.synctex.gz
 *.toc
+
+# LTSpice output files
+*.net
+*.plt
+*.raw
 
 # PDF outputs
 hs15/powercan/transmit/doc/doc.pdf
