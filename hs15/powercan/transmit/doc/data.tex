@@ -1,5 +1,5 @@
 \section{Datenübertragung}
-Die Datenübertragung erfolgt andüber 
+Die Datenübertragung erfolgt über 
 CAN\footnote{\textbf{C}ontroller \textbf{A}rea \textbf{N}etwork}. Dazu werden 
 die Datenleitungen mittels Kondensatoren auf die Busleitungen eingekoppelt. Da 
 CAN nicht frei von DC ist, müssen die korrekten Signalpegel wiederhergestellt 
@@ -12,7 +12,7 @@ verbunden. Da die Signale kapazitiv gekoppelt sind, nähern sich die Spannungen
 wieder 2.5\si{\volt} an. Somit kann nicht mehr korrekt zwischen "'High"' und 
 "'Low"' unterschieden werden. Für die Rekonstruktion der Signalpegel kann man 
 sich nun zu Nutze machen, dass bei CAN nach sechs identischen Bit ein 
-"'Stopfbit"' gesendet wird. daher kann eine solche "'High"'-Periode maximal 
+"'Stopfbit"' gesendet wird. Daher kann eine solche "'High"'-Periode maximal 
 sechs Taktzyklen dauern. Danach wird garantiert ein "'Low"' gesendet. Dieses 
 muss nun genutzt werden, um die Signalpegel wiederherzustellen. Dabei nutzt 
 man die Tatsache, dass der Spannungspegel an CAN\_H immer höher als jener an 
