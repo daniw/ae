@@ -24,11 +24,15 @@ eingekoppelt.
     \label{fig:sol}
 \end{figure}
 Dabei müssen folgende Impedanzen beachtet werden: 
-\paragraph{Power}
-\[ X_L = j \cdot \omega \cdot L \]
-\[ X_{L_{P}}   = j \cdot \omega_{P_{max}}   \cdot L << R_{L} \]
-\[ X_{L_{CAN}} = j \cdot \omega_{CAN_{min}} \cdot L >> R_{L} \]
-\paragraph{CAN}
-\[ X_C = \frac{1}{j \cdot \omega \cdot C} \]
-\[ X_{C_{P}}   = \frac{1}{j \cdot \omega_{P_{max}}   \cdot C} >> R_{CAN} \]
-\[ X_{C_{CAN}} = \frac{1}{j \cdot \omega_{CAN_{min}} \cdot C} << R_{CAN} \]
+\begin{minipage}{0.5\textwidth}
+    \paragraph{Leistung}
+    \[ X_L = j \cdot \omega \cdot L \]
+    \[ X_{L_{P}}   = j \cdot \omega_{P_{max}}   \cdot L << R_{L} \]
+    \[ X_{L_{CAN}} = j \cdot \omega_{CAN_{min}} \cdot L >> R_{L} \]
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+    \paragraph{Daten}
+    \[ X_C = \frac{1}{j \cdot \omega \cdot C} \]
+    \[ X_{C_{P}}   = \frac{1}{j \cdot \omega_{P_{max}}   \cdot C} >> R_{CAN} \]
+    \[ X_{C_{CAN}} = \frac{1}{j \cdot \omega_{CAN_{min}} \cdot C} << R_{CAN} \]
+\end{minipage}
