@@ -9,6 +9,7 @@
 *.toc
 
 # LTSpice output files
+*.fft
 *.net
 *.plt
 *.raw
