@@ -12,7 +12,11 @@
 *.fft
 *.net
 *.plt
+*.prn
+*.ps
 *.raw
+*.txt
+*.wmf
 
 # PDF outputs
 hs15/powercan/transmit/doc/doc.pdf
