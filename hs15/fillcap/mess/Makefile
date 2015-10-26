@@ -7,9 +7,9 @@ build: 01
 data: 01_data
 
 01:
-	pdflatex mess_01.tex
-	pdflatex mess_01.tex
-	pdflatex mess_01.tex
+	pdflatex mess01.tex
+	pdflatex mess01.tex
+	pdflatex mess01.tex
 
 01_data:
 	octave mess01.m
