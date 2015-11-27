@@ -21,6 +21,7 @@
 # PDF outputs
 hs15/powercan/transmit/doc/doc.pdf
 hs15/fillcap/mess/mess*.pdf
+hs15/fillcap/doc/fillcap_doc.pdf
 
 # VIM temporary files
 *.swp
