@@ -25,3 +25,7 @@ hs15/fillcap/doc/fillcap_doc.pdf
 
 # VIM temporary files
 *.swp
+
+# Altium Designer
+hs15/fillcap/pcb/__Previews
+hs15/fillcap/pcb/History
