@@ -31,3 +31,15 @@ hs15/fillcap/pcb/__Previews
 hs15/fillcap/pcb/History
 hs15/fillcap/pcb/stp_ext
 hs15/fillcap/pcb/project\ outputs\ for\ fillcap
+
+# Kinetis Design Studio
+**/*.g_c
+**/*.g_x
+**/*.cwGeneratedFileSetLog
+**/ProjectInfo.xml
+**/Generated_Code
+**/Documentation
+**/Static_Code
+**/Debug
+**/doxy
+**/language.settings.xml
