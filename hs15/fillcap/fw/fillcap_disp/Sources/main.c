@@ -34,18 +34,43 @@
 #include "LEDpin1.h"
 #include "BitIoLdd1.h"
 #include "WAIT.h"
+#include "USB1.h"
+#include "USB0.h"
+#include "CDC1.h"
+#include "Tx1.h"
+#include "Rx1.h"
+#include "CS1.h"
+#include "CLS1.h"
+#include "TMOUT1.h"
+#include "UTIL1.h"
+#include "FRTOS1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "Shell.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+
+static void led_task(void *param) {
+  (void)param;
+  for(;;) {
+    LED_Neg();
+    if (LED_Get()) {
+      vTaskDelay(pdMS_TO_TICKS(10));
+    }
+    else {
+      vTaskDelay(pdMS_TO_TICKS(990));
+    } /* if */
+  } /* for */
+}
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
 {
   /* Write your local variable definition here */
+	int i;
 
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
@@ -53,10 +78,15 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-  while(1) {
-	  LED_Neg();
-	  WAIT_Waitms(100);
+  LED_Neg();
+  WAIT_Waitms(50);
+  LED_Neg();
+  WAIT_Waitms(200);
+
+  if (xTaskCreate(led_task, "Led", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+    for(;;){} /* error! probably out of memory */
   }
+  SHELL_Init();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
