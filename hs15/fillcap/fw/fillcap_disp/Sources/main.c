@@ -42,6 +42,8 @@
 #include "CS1.h"
 #include "CLS1.h"
 #include "TMOUT1.h"
+#include "AD1.h"
+#include "AdcLdd1.h"
 #include "UTIL1.h"
 #include "FRTOS1.h"
 /* Including shared modules, which are used for whole project */
@@ -50,6 +52,7 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "Shell.h"
+#include "Fillcap.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 static void led_task(void *param) {
@@ -87,6 +90,7 @@ int main(void)
     for(;;){} /* error! probably out of memory */
   }
   SHELL_Init();
+  Fillcap_Init();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

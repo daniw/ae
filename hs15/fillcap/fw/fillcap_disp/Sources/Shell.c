@@ -9,12 +9,14 @@
 #include "Shell.h"
 #include "CLS1.h"
 #include "LED.h"
+#include "Fillcap.h"
 
 static const CLS1_ParseCommandCallback CmdParserTable[] =
 {
   CLS1_ParseCommand,
   FRTOS1_ParseCommand,
   LED_ParseCommand,
+  Fillcap_ParseCommand,
   NULL /* sentinel */
 };
 
