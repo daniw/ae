@@ -8,6 +8,7 @@
 #include "Shell.h"
 #include "CLS1.h"
 #include "LED.h"
+#include "AD1.h"
 #include "Fillcap.h"
 
 uint16_t voltage;
@@ -17,7 +18,8 @@ static void FillcapTask(void *pvParameters) {
     unsigned char buf[48];
     (void)pvParameters; /* not used */
     while (1) {
-        voltage++;
+        AD1_Measure(1);;
+        AD1_GetValue16(&voltage);;
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
@@ -50,9 +52,37 @@ static uint8_t PrintHelp(const CLS1_StdIOType *io)
     CLS1_SendHelpStr((unsigned char*)"  help|status",
              (unsigned char*)"Print help or status information\r\n",
              io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  bar",
+             (unsigned char*)"Display measurement value as bargraph\r\n",
+             io->stdOut);
     CLS1_SendHelpStr((unsigned char*)"  freq f",
              (unsigned char*)"Set measurement frequency\r\n",
              io->stdOut);
+    return ERR_OK;
+}
+
+static uint8_t PrintBar(const CLS1_StdIOType *io)
+{
+    unsigned char str_voltage[10] = { '\0' };
+    str_voltage[0] = ' ';
+    str_voltage[1] = ' ';
+    UTIL1_Num16uToStr(str_voltage+2, sizeof(str_voltage)-2, voltage);
+
+    unsigned char str_bar[83] = { '\0' };
+    for (uint32_t i = 0; i < 80; i++) {
+        if (voltage > (i*819)) {
+            str_bar[i] = FILLCAP_BAR_FULL;
+        }
+        else {
+            str_bar[i] = FILLCAP_BAR_EMPTY;
+        }
+    }
+    str_bar[80] = '\r';
+    str_bar[81] = '\n';
+    str_bar[82] = '\0';
+    //CLS1_SendStr((unsigned char*)str_bar, io->stdOut);
+    CLS1_SendStatusStr((unsigned char*)str_voltage, (unsigned char*)str_bar, io->stdOut);
+
     return ERR_OK;
 }
 
@@ -72,6 +102,11 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
     {
         *handled = TRUE;
         return PrintStatus(io);
+    }
+    else if ((UTIL1_strcmp((char*)cmd, "bar") == 0) || (UTIL1_strcmp((char*)cmd, "Fillcap bar") == 0))
+    {
+        *handled = TRUE;
+        return PrintBar(io);
     }
     else if (UTIL1_strcmp((char*)cmd, "Fillcap generator") == 0)
     {

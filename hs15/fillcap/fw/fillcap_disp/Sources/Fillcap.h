@@ -7,6 +7,8 @@
 #ifndef FILLCAP_H_
 #define FILLCAP_H_
 
+#define FILLCAP_BAR_FULL  '#'
+#define FILLCAP_BAR_EMPTY '.'
 #define FILLCAP_FREQ_MIN 1000
 #define FILLCAP_FREQ_MAX 30000
 
