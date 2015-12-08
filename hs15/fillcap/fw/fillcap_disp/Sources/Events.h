@@ -48,6 +48,10 @@
 #include "TMOUT1.h"
 #include "AD1.h"
 #include "AdcLdd1.h"
+#include "CLK_SEL.h"
+#include "BitIoLdd2.h"
+#include "DRV_CLK.h"
+#include "PpgLdd1.h"
 #include "UTIL1.h"
 #include "FRTOS1.h"
 

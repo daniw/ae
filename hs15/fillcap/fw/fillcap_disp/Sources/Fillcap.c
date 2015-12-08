@@ -9,6 +9,8 @@
 #include "CLS1.h"
 #include "LED.h"
 #include "AD1.h"
+#include "CLK_SEL.h"
+#include "DRV_CLK.h"
 #include "Fillcap.h"
 
 uint16_t voltage;
@@ -58,6 +60,9 @@ static uint8_t PrintHelp(const CLS1_StdIOType *io)
     CLS1_SendHelpStr((unsigned char*)"  freq f",
              (unsigned char*)"Set measurement frequency\r\n",
              io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  clk sw|hw",
+             (unsigned char*)"Switch clock generation between software and hardware\r\n",
+             io->stdOut);
     return ERR_OK;
 }
 
@@ -80,7 +85,6 @@ static uint8_t PrintBar(const CLS1_StdIOType *io)
     str_bar[80] = '\r';
     str_bar[81] = '\n';
     str_bar[82] = '\0';
-    //CLS1_SendStr((unsigned char*)str_bar, io->stdOut);
     CLS1_SendStatusStr((unsigned char*)str_voltage, (unsigned char*)str_bar, io->stdOut);
 
     return ERR_OK;
@@ -108,16 +112,12 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
         *handled = TRUE;
         return PrintBar(io);
     }
-    else if (UTIL1_strcmp((char*)cmd, "Fillcap generator") == 0)
-    {
-        *handled = TRUE;
-        return ERR_OK;
-    }
     else if (UTIL1_strncmp((char*)cmd, "Fillcap freq ", sizeof("Fillcap freq")-1) == 0)
     {
         p = cmd+sizeof("Fillcap freq");
         if (UTIL1_xatoi(&p, &val) == ERR_OK && val >= FILLCAP_FREQ_MIN && val <= FILLCAP_FREQ_MAX)
         {
+        	// Frequency in min/max range -> compute period
             freq = val;
             *handled = TRUE;
         }
@@ -131,9 +131,22 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
             UTIL1_Num16uToStr(number, sizeof(number), FILLCAP_FREQ_MAX);
             UTIL1_strcat(message, sizeof(message), number);
             UTIL1_strcat(message, sizeof(message), "\r\n");
-            //sprintf(message, "Wrong argument, must be in range %i to %i", FILLCAP_FREQ_MIN, FILLCAP_FREQ_MAX);
             CLS1_SendStr((unsigned char*)message, io->stdErr);
         }
+    }
+    else if (UTIL1_strcmp((char*)cmd, "clk sw") == 0)
+    {
+    	CLK_SEL_ClrVal();
+    	DRV_CLK_Enable();
+        *handled = TRUE;
+        return ERR_OK;
+    }
+    else if (UTIL1_strcmp((char*)cmd, "clk hw") == 0)
+    {
+    	CLK_SEL_SetVal();
+    	DRV_CLK_Disable();
+        *handled = TRUE;
+        return ERR_OK;
     }
     return ERR_OK;
 }
