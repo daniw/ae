@@ -15,6 +15,8 @@
 
 uint16_t voltage;
 uint16_t freq;
+uint16_t bar_min;
+uint16_t bar_max;
 
 static void FillcapTask(void *pvParameters) {
     unsigned char buf[48];
@@ -28,6 +30,8 @@ static void FillcapTask(void *pvParameters) {
 
 void Fillcap_Init(void) {
     voltage = 0;
+    bar_min = FILLCAP_BAR_DEF_MIN;
+    bar_max = FILLCAP_BAR_DEF_MAX;
     if (FRTOS1_xTaskCreate(FillcapTask, "Fillcap", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL) != pdPASS) {
         for(;;){} /* error */
     }
@@ -57,6 +61,12 @@ static uint8_t PrintHelp(const CLS1_StdIOType *io)
     CLS1_SendHelpStr((unsigned char*)"  bar",
              (unsigned char*)"Display measurement value as bargraph\r\n",
              io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  min",
+             (unsigned char*)"Calibrate bargraph for empty container\r\n",
+             io->stdOut);
+    CLS1_SendHelpStr((unsigned char*)"  max",
+             (unsigned char*)"Calibrate bargraph for full container\r\n",
+             io->stdOut);
     CLS1_SendHelpStr((unsigned char*)"  freq f",
              (unsigned char*)"Set measurement frequency\r\n",
              io->stdOut);
@@ -73,9 +83,9 @@ static uint8_t PrintBar(const CLS1_StdIOType *io)
     str_voltage[1] = ' ';
     UTIL1_Num16uToStr(str_voltage+2, sizeof(str_voltage)-2, voltage);
 
-    unsigned char str_bar[83] = { '\0' };
-    for (uint32_t i = 0; i < 80; i++) {
-        if (voltage > (i*819)) {
+    unsigned char str_bar[FILLCAP_BAR_LENGTH + 3] = { '\0' };
+    for (uint32_t i = 0; i < FILLCAP_BAR_LENGTH; i++) {
+        if (voltage > (bar_min + i * ((bar_max - bar_min) / (FILLCAP_BAR_LENGTH - 1)))) {
             str_bar[i] = FILLCAP_BAR_FULL;
         }
         else {
@@ -86,6 +96,26 @@ static uint8_t PrintBar(const CLS1_StdIOType *io)
     str_bar[81] = '\n';
     str_bar[82] = '\0';
     CLS1_SendStatusStr((unsigned char*)str_voltage, (unsigned char*)str_bar, io->stdOut);
+
+    return ERR_OK;
+}
+
+static uint8_t Cal_min(const CLS1_StdIOType *io)
+{
+    bar_min = voltage;
+    if (bar_min > bar_max) {
+        bar_max = bar_min;
+    }
+
+    return ERR_OK;
+}
+
+static uint8_t Cal_max(const CLS1_StdIOType *io)
+{
+    bar_max = voltage;
+    if (bar_min > bar_max) {
+        bar_min = bar_max;
+    }
 
     return ERR_OK;
 }
