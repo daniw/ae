@@ -142,6 +142,16 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
         *handled = TRUE;
         return PrintBar(io);
     }
+    else if ((UTIL1_strcmp((char*)cmd, "min") == 0) || (UTIL1_strcmp((char*)cmd, "Fillcap min") == 0))
+    {
+        *handled = TRUE;
+        return Cal_min(io);
+    }
+    else if ((UTIL1_strcmp((char*)cmd, "max") == 0) || (UTIL1_strcmp((char*)cmd, "Fillcap max") == 0))
+    {
+        *handled = TRUE;
+        return Cal_max(io);
+    }
     else if (UTIL1_strncmp((char*)cmd, "Fillcap freq ", sizeof("Fillcap freq")-1) == 0)
     {
         p = cmd+sizeof("Fillcap freq");
