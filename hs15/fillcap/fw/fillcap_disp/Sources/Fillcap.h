@@ -12,8 +12,8 @@
 #define FILLCAP_BAR_LENGTH 80
 #define FILLCAP_BAR_DEF_MIN 0
 #define FILLCAP_BAR_DEF_MAX 0xffff
-#define FILLCAP_FREQ_MIN 1000
-#define FILLCAP_FREQ_MAX 30000
+#define FILLCAP_FREQ_MIN    1000
+#define FILLCAP_FREQ_MAX 1000000
 
 /*! \brief fillcap initialization */
 void Fillcap_Init(void);

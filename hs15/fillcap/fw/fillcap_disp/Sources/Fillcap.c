@@ -14,7 +14,6 @@
 #include "Fillcap.h"
 
 uint16_t voltage;
-uint16_t freq;
 uint16_t bar_min;
 uint16_t bar_max;
 
@@ -157,8 +156,8 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
         p = cmd+sizeof("Fillcap freq");
         if (UTIL1_xatoi(&p, &val) == ERR_OK && val >= FILLCAP_FREQ_MIN && val <= FILLCAP_FREQ_MAX)
         {
-        	// Frequency in min/max range -> compute period
-            freq = val;
+        	// Frequency in min/max range -> set frequency
+            DRV_CLK_SetFreqHz(val);
             *handled = TRUE;
         }
         else
@@ -168,7 +167,7 @@ byte Fillcap_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_St
             UTIL1_Num16uToStr(number, sizeof(number), FILLCAP_FREQ_MIN);
             UTIL1_strcat(message, sizeof(message), number);
             UTIL1_strcat(message, sizeof(message), " to ");
-            UTIL1_Num16uToStr(number, sizeof(number), FILLCAP_FREQ_MAX);
+            UTIL1_Num32uToStr(number, sizeof(number), FILLCAP_FREQ_MAX);
             UTIL1_strcat(message, sizeof(message), number);
             UTIL1_strcat(message, sizeof(message), "\r\n");
             CLS1_SendStr((unsigned char*)message, io->stdErr);
